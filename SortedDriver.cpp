@@ -7,7 +7,7 @@
 
 #include "RandomUtilities.h"
 #include "ContainerPrinting.h"
-#include "winTimer.h"
+#include "unixTimer.h"
 #include <list>
 #include <iostream>
 #include <vector>
@@ -62,9 +62,33 @@ getWords(size_t numWords, size_t wordLength, string alphabet)
 // post: The most isolated entry in number has been returned
 double
 mostIsolated(vector<double> & number)
-{
-	// STUB  STUB  STUB
-	return -123.456;
+{	
+	int last;
+	int next;
+	int tot;
+	int max;
+	int num;
+	max = 0;
+	num = 0;
+
+	for(int i = 0; i < number.size(); i++){
+		
+		last = i;
+		next = i;
+		if(i > 0){
+			last = i - 1;
+		}
+		if(i < number.size() - 1){
+			next = i + 1;
+		}
+		tot = last + next;
+		if(tot > max){
+			max = tot;
+			num = number[i];
+		}
+	}
+
+	return num;
 }
 
 
@@ -74,8 +98,15 @@ mostIsolated(vector<double> & number)
 int
 unmatched(list<string> & A, list<string> & B)
 {
-	// STUB  STUB  STUB
-	return -1;
+	int matches = 0;
+	for(std::list<string>::iterator it = A.begin(); it != A.end(); ++it){
+		for(std::list<string>::iterator jt = B.begin(); jt != B.end(); ++jt){
+			if(*it == *jt){
+				matches++;
+			}
+		}
+	}
+	return A.size() - matches;
 }
 
 
