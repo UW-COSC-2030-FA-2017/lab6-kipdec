@@ -7,7 +7,7 @@
 
 #include "RandomUtilities.h"
 #include "ContainerPrinting.h"
-#include "unixTimer.h"
+#include "unixTimer.cpp"
 #include <list>
 #include <iostream>
 #include <vector>
@@ -63,26 +63,31 @@ getWords(size_t numWords, size_t wordLength, string alphabet)
 double
 mostIsolated(vector<double> & number)
 {	
-	int last;
-	int next;
-	int tot;
-	int max;
-	int num;
-	max = 0;
-	num = 0;
+	double last;
+	double next;
+	double tot;
+	double max = 0;
+	double num = 0;
 
 	for(int i = 0; i < number.size(); i++){
 		
-		last = i;
-		next = i;
+		last = number[i];
+		next = number[i];
 		if(i > 0){
-			last = i - 1;
+			last = number[i - 1];
 		}
 		if(i < number.size() - 1){
-			next = i + 1;
+			next = number[i + 1];
 		}
-		tot = last + next;
+		if(last < 0 && next < 0){
+			tot = abs(last) + next;
+		} else if(last <0 && next > 0){
+			tot = abs(last) + next;
+		} else {
+			tot = next - last;
+		}
 		if(tot > max){
+
 			max = tot;
 			num = number[i];
 		}
@@ -98,12 +103,21 @@ mostIsolated(vector<double> & number)
 int
 unmatched(list<string> & A, list<string> & B)
 {
+	A.unique();
+	B.unique();
 	int matches = 0;
+
 	for(std::list<string>::iterator it = A.begin(); it != A.end(); ++it){
+
+		int count = 0;
 		for(std::list<string>::iterator jt = B.begin(); jt != B.end(); ++jt){
 			if(*it == *jt){
 				matches++;
+				for(int j = 0; j < count; j++){
+					B.pop_front();
+				}
 			}
+			count++;
 		}
 	}
 	return A.size() - matches;

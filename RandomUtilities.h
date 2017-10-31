@@ -16,6 +16,7 @@
 #include <cmath>
 #include <ctime>
 #include <algorithm>
+#include <stdlib.h>
 
 
 // Seed the random-number generator with current time so that
@@ -28,7 +29,7 @@ void randomizeSeed()
 	static bool called = false;
 	if( ! called )
 	{
-      srand( unsigned long( std::time( NULL ) ) );
+      srand( unsigned (long (  std::time( NULL ) ) ) );
 		called = true;
 	}
 }
