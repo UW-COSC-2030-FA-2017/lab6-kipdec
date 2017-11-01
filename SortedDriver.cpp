@@ -1,5 +1,6 @@
 // SortedDriver.cpp
-
+// Kip DeCastro
+// Oct 31, 2017
 // tom bailey   1445  25 mar 2014
 // Construct sorted sequences and call functions that 
 //   process the sorted sequences.
